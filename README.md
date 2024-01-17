@@ -25,7 +25,7 @@ s3://my-bucket-name/path/to/tables-directory/catalog_returns/
 ```
 
 and print the result to stdout like below:
-```shell
+```
 Number of .parquet files in call_center              :        1
 Number of .parquet files in catalog_page             :        1
 Number of .parquet files in catalog_returns          :     2104
