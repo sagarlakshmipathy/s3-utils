@@ -51,3 +51,25 @@ Number of .parquet files in web_returns              :     2184
 Number of .parquet files in web_sales                :     1823
 Number of .parquet files in web_site                 :        1
 ```
+
+## delete-metadata-delta-log-folders.sh
+This script will delete the `metadata/`, `_delta_log` folders in a directory. This is especially geared towards using TPCDS datasets.
+
+### Usage:
+```shell
+./delete-metadata-delta-log-folders.sh --bucket-name <bucket-name> --prefix <prefix>
+```
+
+### Example:
+```shell
+./delete-metadata-delta-log-folders.sh --bucket-name my-bucket-name --prefix path/to/tables-directory
+```
+
+will delete the `metadata/`, `_delta_log` folders in
+
+```shell
+s3://my-bucket-name/path/to/tables-directory/call_center/
+s3://my-bucket-name/path/to/tables-directory/catalog_page/
+s3://my-bucket-name/path/to/tables-directory/catalog_returns/
+...
+```
