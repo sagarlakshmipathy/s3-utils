@@ -73,3 +73,26 @@ s3://my-bucket-name/path/to/tables-directory/catalog_page/
 s3://my-bucket-name/path/to/tables-directory/catalog_returns/
 ...
 ```
+
+## list-metadata-json-files.sh
+This script will list the names of the metadata json files in a directory. This is especially geared towards using TPCDS datasets.
+
+### Usage:
+```shell
+./list-metadata-json-files.sh --bucket-name <bucket-name> --prefix <prefix>
+```
+
+### Example:
+```shell
+./list-metadata-json-files.sh --bucket-name my-bucket-name --prefix path/to/tables-directory
+```
+
+will list the names of the metadata json files in
+
+```shell
+s3://my-bucket-name/path/to/tables-directory/call_center/
+s3://my-bucket-name/path/to/tables-directory/catalog_page/
+s3://my-bucket-name/path/to/tables-directory/catalog_returns/
+...
+```
+
