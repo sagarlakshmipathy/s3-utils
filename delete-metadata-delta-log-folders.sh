@@ -25,7 +25,7 @@ if [ -z "$bucket" ] || [ -z "$base_path" ]; then
 fi
 
 # Define folders
-folders=("call_center" "catalog_page" "catalog_returns" "catalog_sales" "customer_address" "customer_demographics" "customer" "date_dim" "household_demographics" "income_band" "inventory" "item" "promotion" "reason" "ship_mode" "store_returns" "store_sales" "store" "time_dim" "warehouse" "web_page" "web_returns" "web_sales" "web_site")
+folders=("call_center" "catalog_page" "catalog_returns" "catalog_sales" "customer" "customer_address" "customer_demographics" "date_dim" "household_demographics" "income_band" "inventory" "item" "promotion" "reason" "ship_mode" "store" "store_returns" "store_sales" "time_dim" "warehouse" "web_page" "web_returns" "web_sales" "web_site")
 
 # Define subfolders to delete
 subfolders_to_delete=("metadata" "_delta_log")
