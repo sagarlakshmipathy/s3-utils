@@ -1,3 +1,5 @@
-argparse
+argparse~=1.4.0
 botocore
-boto3
+boto3~=1.28.62
+pytest~=7.4.3
+pytest-mock~=3.12.0
