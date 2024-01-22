@@ -4,7 +4,7 @@ import sys
 import boto3
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from utils.common import base_parse_args, get_folders
+from src.utils.common import base_parse_args, get_folders
 
 # set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')

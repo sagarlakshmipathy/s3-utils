@@ -4,7 +4,7 @@ import sys
 import argparse
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from data import folders
+from src.data import folders
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 

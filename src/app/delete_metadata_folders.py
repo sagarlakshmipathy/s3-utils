@@ -3,9 +3,9 @@ import sys
 import boto3
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from data.table_formats import MetadataFolderNames
-from utils.common import base_parse_args, get_folders
-from utils.exceptions import MetadataFolderNotFoundError
+from src.data.table_formats import MetadataFolderNames
+from src.utils.common import base_parse_args, get_folders
+from src.utils.exceptions import MetadataFolderNotFoundError
 from botocore.exceptions import ClientError
 
 
