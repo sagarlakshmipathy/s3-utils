@@ -1,5 +1,7 @@
-METADATA_FOLDER_NAMES = {
-    "hudi": ".hoodie",
-    "iceberg": "metadata",
-    "delta": "_delta_log"
-}
+from enum import Enum
+
+
+class MetadataFolderNames(Enum):
+    HUDI = ".hoodie"
+    ICEBERG = "metadata"
+    DELTA = "_delta_log"

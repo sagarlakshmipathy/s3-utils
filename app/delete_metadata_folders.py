@@ -3,8 +3,10 @@ import sys
 import boto3
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from data import table_formats
+from data.table_formats import MetadataFolderNames
 from utils.common import base_parse_args, get_folders
+from utils.exceptions import MetadataFolderNotFoundError
+from botocore.exceptions import ClientError
 
 
 def parse_args_delete_metadata():
@@ -29,7 +31,7 @@ def parse_args_delete_metadata():
 
 def get_metadata_folders_to_delete(args):
     table_format_names = args.table_format_names.split(",")
-    return [table_formats.METADATA_FOLDER_NAMES[table_format] for table_format in table_format_names]
+    return [MetadataFolderNames[table_format.upper()] for table_format in table_format_names]
 
 
 def delete_folders(s3, args, folders, metadata_folders_to_delete):
@@ -41,8 +43,11 @@ def delete_folders(s3, args, folders, metadata_folders_to_delete):
                 for obj in bucket.objects.filter(Prefix=f"{args.prefix}/{folder}/{metadata_folder_name}/"):
                     s3.Object(bucket.name, obj.key).delete()
                 print(f"Deleted {metadata_folder_name} folder inside {args.prefix}/{folder}")
-            except:
-                print(f"{metadata_folder_name} folder not found inside {args.prefix}/{folder}")
+            except ClientError as e:
+                if e.response['Error']['Code'] == '404':
+                    raise MetadataFolderNotFoundError(metadata_folder_name.value, args.prefix, folder)
+                else:
+                    raise e
 
 
 def main():

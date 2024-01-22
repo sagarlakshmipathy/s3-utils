@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 import boto3
@@ -5,23 +6,14 @@ import boto3
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.common import base_parse_args, get_folders
 
+# set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+
 
 def parse_args_list_metadata_json_files():
     required_args = ["--bucket-name", "--prefix"]
     optional_args = ["--folder-names"]
-    args = base_parse_args(required_args, optional_args)
-    try:
-        if not args.bucket_name or not args.prefix:
-            raise AttributeError
-    except AttributeError:
-        print("""
-        Usage: python list_metadata_json_files.py
-        --bucket-name <bucket_name>
-        --prefix <base_path>
-        [--folder-names <comma_separated_folder_names>]""")
-        raise SystemExit
-
-    return args
+    return base_parse_args(required_args, optional_args)
 
 
 def list_json_files(s3, args, folders):
@@ -31,9 +23,9 @@ def list_json_files(s3, args, folders):
             contents = response["Contents"]
             for obj in contents:
                 if obj["Key"].endswith(".json"):
-                    print(f"{folder.ljust(25)} : {os.path.basename(obj['Key'])}")
+                    logging.info(f"{folder.ljust(25)} : {os.path.basename(obj['Key'])}")
         except KeyError:
-            print(f"No json files in {folder} or the folder does not exist.")
+            logging.error(f"No json files in {args.prefix}/{folder} or the folder does not exist.", exc_info=True)
 
 
 def main():
